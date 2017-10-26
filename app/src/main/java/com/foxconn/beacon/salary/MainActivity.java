@@ -1,7 +1,5 @@
 package com.foxconn.beacon.salary;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
