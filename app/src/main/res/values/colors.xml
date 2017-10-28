@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGray">#cccccc</color>
-    <color name="app_base_color">#D81E06</color>
+    <color name="colorGray">#8a8a8a</color>
+    <color name="background_gray">#cccccc</color>
+    <color name="app_base_color">#D81F26</color>
 </resources>
