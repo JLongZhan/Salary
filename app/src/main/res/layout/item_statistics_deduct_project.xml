@@ -6,22 +6,31 @@
               android:orientation="vertical">
 
     <com.foxconn.beacon.salary.view.StatisticsTitleView
+        android:id="@+id/statisticsTitle_deduct_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:project_money="-0.00元"
-        app:project_name="扣款项目"/>
+        app:title_left_name="扣款项目"
+        app:title_right_name="-0.00元"/>
 
+    <LinearLayout
+        android:id="@+id/ll_deduct_project"
+        android:layout_width="match_parent"
+        android:background="@color/background_gray"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
     <!--描述信息-->
     <TextView
-        android:id="@+id/tv_item_dedect_description"
+        android:id="@+id/tv_statistics_deduct_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:gravity="center"
         android:text="包含事假、病假、食堂消费等扣款项目"/>
 
+
     <Button
-        android:id="@+id/btn_item_add_subsidy"
+        android:id="@+id/btn_statistics_add_deduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

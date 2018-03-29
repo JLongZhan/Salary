@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radio_group_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <RadioButton
+            style="@style/radio_button_style"
+            android:text="其他日期\n"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_button_before_yest"
+            style="@style/radio_button_style"
+            android:text="前天\n星期一"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_button_yest"
+            style="@style/radio_button_style"
+            android:text="昨天\n星期二"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_button_today"
+            style="@style/radio_button_style"
+            android:text="今天\n星期三"
+            />
+    </RadioGroup>
+</LinearLayout>

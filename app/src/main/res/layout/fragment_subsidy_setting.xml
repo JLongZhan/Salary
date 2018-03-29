@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_statistics_setting_item_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/colorWhite"
+    android:gravity="center_vertical"
+    android:padding="10dp"
+    >
+
+    <TextView
+        android:id="@+id/tv_subsidy_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="手动输入基本工资"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_money_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:text="元/月"/>
+
+    <EditText
+        android:id="@+id/et_statistics_setting_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/tv_money_unit"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:textColor="@color/colorBlack"/>
+</RelativeLayout>

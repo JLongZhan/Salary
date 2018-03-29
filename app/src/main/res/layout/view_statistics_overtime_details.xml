@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorGray"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_statistics_overtime_work"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/v_rect"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:background="@color/colorWork"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/v_rect"
+            android:padding="5dp"
+            android:text="平时加班(1.5倍)"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_overtime_work_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v_rect"
+            android:padding="5dp"
+            android:text="43.11元/时 x 9.00时"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_overtime_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="+574.80"
+            android:textColor="@color/app_base_color"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <!--周末-->
+    <RelativeLayout
+        android:id="@+id/rl_statistics_overtime_rest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/v_rect2"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:background="@color/colorRed"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/v_rect2"
+            android:padding="5dp"
+            android:text="周末加班(2.0倍)"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_overtime_rest_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v_rect2"
+            android:padding="5dp"
+            android:text="43.11元/时 x 9.00时"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_overtime_rest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="+574.80"
+            android:textColor="@color/app_base_color"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_statistics_overtime_holiday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/v_rect3"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:background="@color/colorYellow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/v_rect3"
+            android:padding="5dp"
+            android:text="节日加班(3.0倍)"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_overtime_holiday_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v_rect3"
+            android:padding="5dp"
+            android:text="43.11元/时 x 9.00时"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_overtime_holiday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="+574.80"
+            android:textColor="@color/app_base_color"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+</LinearLayout>

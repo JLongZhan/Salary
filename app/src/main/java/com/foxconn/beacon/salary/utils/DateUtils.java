@@ -27,10 +27,22 @@ public class DateUtils {
     // 格式：小时：分钟：秒
     public static final String LONG_TIME = "HH:mm:ss";
 
-    public static final String WeekNames[] = { "星期日", "星期一", "星期二", "星期三",
-            "星期四", "星期五", "星期六" };
+    public static final String[] CHINESE_WEEK_NAMES = {"星期日", "星期一", "星期二", "星期三",
+            "星期四", "星期五", "星期六"};
+    public static final String[] ENGLISH_WEEK_NAMES = {"Sun", "Mon", "Tues", "Wed",
+            "Thurs", "Fri", "Sat"};
 
-    public DateUtils() {
+    private DateUtils() {
+    }
+
+    /**
+     * 将Long类型时间转换为字符串
+     *
+     * @param time
+     * @return
+     */
+    public static String long2String(long time) {
+        return date2String(new Date(time), LONG_DATE);
     }
 
     /**
@@ -57,9 +69,9 @@ public class DateUtils {
      * 把符合日期格式的字符串转换为日期类型
      */
     public static Date string2Date(String dateStr, String format,
-                                             ParsePosition pos) {
+                                   ParsePosition pos) {
         Date d = null;
-        SimpleDateFormat formater = new SimpleDateFormat(format,Locale.CHINA);
+        SimpleDateFormat formater = new SimpleDateFormat(format, Locale.CHINA);
         try {
             formater.setLenient(false);
             d = formater.parse(dateStr, pos);
@@ -72,13 +84,23 @@ public class DateUtils {
     }
 
     /**
+     * 返回日期的月份和日  MM-dd
+     *
+     * @param date
+     * @return
+     */
+    public static String getMonthAndDay(Date date) {
+        return date2String(date, SHORT_DATE);
+    }
+
+    /**
      * 把日期转换为字符串
      *
      * @param date
      * @return
      */
     public static String date2String(Date date, String format) {
-        if(date == null){
+        if (date == null) {
             return "";
         }
         String result = "";
@@ -116,9 +138,32 @@ public class DateUtils {
         return DateUtils.date2String(new Date(), DateUtils.LONG_DATE);
     }
 
+    /**
+     * 格式化时间
+     *
+     * @param format 指定格式
+     * @return
+     */
+    public static String formatTime(long time, String format) {
+        return date2String(new Date(time), format);
+    }
+
     public static String getCurrWeek() {
         int i = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        return WeekNames[i - 1];
+        return CHINESE_WEEK_NAMES[i - 1];
+    }
+
+    /**
+     * 得到一周的第几天
+     *
+     * @param date
+     * @return
+     */
+    public static String getDayOfWeek(Date date, boolean isChinese) {
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        int i = instance.get(Calendar.DAY_OF_WEEK);
+        return isChinese ? CHINESE_WEEK_NAMES[i - 1] : ENGLISH_WEEK_NAMES[i - 1];
     }
 
     /**
@@ -178,8 +223,7 @@ public class DateUtils {
     /**
      * 返回日期的年,即yyyy-MM-dd中的yyyy
      *
-     * @param date
-     *            Date
+     * @param date Date
      * @return int
      */
     public static int getYear(Date date) {
@@ -219,28 +263,37 @@ public class DateUtils {
     /**
      * 获得某月的天数
      *
-     * @param year
-     *            年份
-     * @param month
-     *            月份[1-12]
+     * @param year  年份
+     * @param month 月份[1-12]
      * @return 天数
      */
     public static int getDaysOfMonth(String year, String month) {
         int days = 0;
-        if (month.equals("1") || month.equals("3") || month.equals("5")
-                || month.equals("7") || month.equals("8") || month.equals("10")
-                || month.equals("12")) {
-            days = 31;
-        } else if (month.equals("4") || month.equals("6") || month.equals("9")
-                || month.equals("11")) {
-            days = 30;
-        } else {
-            if ((Integer.parseInt(year) % 4 == 0 && Integer.parseInt(year) % 100 != 0)
-                    || Integer.parseInt(year) % 400 == 0) {
-                days = 29;
-            } else {
-                days = 28;
-            }
+        switch (month) {
+            case "1":
+            case "3":
+            case "5":
+            case "7":
+            case "8":
+            case "10":
+            case "12":
+                days = 31;
+                break;
+            case "4":
+            case "6":
+            case "9":
+            case "11":
+                days = 30;
+                break;
+            default:
+                boolean b = (Integer.parseInt(year) % 4 == 0 && Integer.parseInt(year) % 100 != 0)
+                        || Integer.parseInt(year) % 400 == 0;
+                if (b) {
+                    days = 29;
+                } else {
+                    days = 28;
+                }
+                break;
         }
         return days;
     }
@@ -248,10 +301,8 @@ public class DateUtils {
     /**
      * 获取某年某月的天数
      *
-     * @param year
-     *            年份
-     * @param month
-     *            月份[1-12]
+     * @param year  年份
+     * @param month 月份[1-12]
      * @return 天数
      */
     public static int getDaysOfMonth(int year, int month) {
@@ -263,10 +314,8 @@ public class DateUtils {
     /**
      * 计算两个日期相差的天数，如果date2 > date1 返回正数，否则返回负数
      *
-     * @param date1
-     *            Date
-     * @param date2
-     *            Date
+     * @param date1 Date
+     * @param date2 Date
      * @return long
      */
     public static long dayDiff(Date date1, Date date2) {
@@ -276,10 +325,8 @@ public class DateUtils {
     /**
      * 比较两个日期的年差
      *
-     * @param before
-     *            格式：yyyy-MM-dd
-     * @param after
-     *            格式：yyyy-MM-dd
+     * @param before 格式：yyyy-MM-dd
+     * @param after  格式：yyyy-MM-dd
      * @return
      */
     public static int yearDiff(String before, String after) {
@@ -291,8 +338,7 @@ public class DateUtils {
     /**
      * 当前日期减去after所指定的日期得到的年份
      *
-     * @param after
-     *            格式：yyyy-MM-dd
+     * @param after 格式：yyyy-MM-dd
      * @return
      */
     public static int yearDiffCurr(String after) {
@@ -304,8 +350,7 @@ public class DateUtils {
     /**
      * 比较当前日期与指定日期的差
      *
-     * @param before
-     *            格式：yyyy-MM-dd
+     * @param before 格式：yyyy-MM-dd
      * @return
      */
     public static long dayDiffCurr(String before) {
@@ -328,8 +373,7 @@ public class DateUtils {
     /**
      * 根据生日获取星座
      *
-     * @param birth
-     *            格式：YYYY-mm-dd
+     * @param birth 格式：YYYY-mm-dd
      * @return
      */
     public static String getConstellation(String birth) {
@@ -343,7 +387,7 @@ public class DateUtils {
                 birth.lastIndexOf("-")));
         int day = Integer.parseInt(birth.substring(birth.lastIndexOf("-") + 1));
         String s = "魔羯水瓶双鱼牡羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯";
-        int[] arr = { 20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22 };
+        int[] arr = {20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22};
         int start = month * 2 - (day < arr[month - 1] ? 2 : 0);
         return s.substring(start, start + 2) + "座";
     }
@@ -351,31 +395,26 @@ public class DateUtils {
     /**
      * 判断日期是否有效,包括闰年的情况
      *
-     * @param date
-     *            格式：YYYY-mm-dd
+     * @param date 格式：YYYY-mm-dd
      * @return
      */
     public static boolean isDate(String date) {
-        StringBuffer reg = new StringBuffer(
-                "^((\\d{2}(([02468][048])|([13579][26]))-?((((0?");
-        reg.append("[13578])|(1[02]))-?((0?[1-9])|([1-2][0-9])|(3[01])))");
-        reg.append("|(((0?[469])|(11))-?((0?[1-9])|([1-2][0-9])|(30)))|");
-        reg.append("(0?2-?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][12");
-        reg.append("35679])|([13579][01345789]))-?((((0?[13578])|(1[02]))");
-        reg.append("-?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))");
-        reg.append("-?((0?[1-9])|([1-2][0-9])|(30)))|(0?2-?((0?[");
-        reg.append("1-9])|(1[0-9])|(2[0-8]))))))");
-        Pattern p = Pattern.compile(reg.toString());
+        String reg = "^((\\d{2}(([02468][048])|([13579][26]))-?((((0?" + "[13578])|(1[02]))-?((0?[1-9])|([1-2][0-9])|(3[01])))" +
+                "|(((0?[469])|(11))-?((0?[1-9])|([1-2][0-9])|(30)))|" +
+                "(0?2-?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][12" +
+                "35679])|([13579][01345789]))-?((((0?[13578])|(1[02]))" +
+                "-?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))" +
+                "-?((0?[1-9])|([1-2][0-9])|(30)))|(0?2-?((0?[" +
+                "1-9])|(1[0-9])|(2[0-8]))))))";
+        Pattern p = Pattern.compile(reg);
         return p.matcher(date).matches();
     }
 
     /**
      * 取得指定日期过 months 月后的日期 (当 months 为负数表示指定月之前);
      *
-     * @param date
-     *            日期 为null时表示当天
-     * @param months
-     *            相加(相减)的月数
+     * @param date   日期 为null时表示当天
+     * @param months 相加(相减)的月数
      */
     public static Date nextMonth(Date date, int months) {
         Calendar cal = Calendar.getInstance();
@@ -389,10 +428,8 @@ public class DateUtils {
     /**
      * 取得指定日期过 day 天后的日期 (当 day 为负数表示指日期之前);
      *
-     * @param date
-     *            日期 为null时表示当天
-     * @param days
-     *            相加(相减)的天数
+     * @param date 日期 为null时表示当天
+     * @param days 相加(相减)的天数
      */
     public static Date nextDay(Date date, int days) {
         Calendar cal = Calendar.getInstance();
@@ -420,8 +457,7 @@ public class DateUtils {
     /**
      * 取得指定日期过 week 周后的日期 (当 week 为负数表示指定月之前)
      *
-     * @param date
-     *            日期 为null时表示当天
+     * @param date 日期 为null时表示当天
      */
     public static Date nextWeek(Date date, int week) {
         Calendar cal = Calendar.getInstance();
@@ -489,16 +525,19 @@ public class DateUtils {
         return date;
     }
 
-    /** 针对yyyy-MM-dd HH:mm:ss格式,显示yyyymmdd */
+    /**
+     * 针对yyyy-MM-dd HH:mm:ss格式,显示yyyymmdd
+     */
     public static String getYmdDateCN(String datestr) {
-        if (datestr == null)
+        if (datestr == null) {
             return "";
-        if (datestr.length() < 10)
+        }
+        if (datestr.length() < 10) {
             return "";
-        StringBuffer buf = new StringBuffer();
-        buf.append(datestr.substring(0, 4)).append(datestr.substring(5, 7))
-                .append(datestr.substring(8, 10));
-        return buf.toString();
+        }
+        String buf = datestr.substring(0, 4) + datestr.substring(5, 7) +
+                datestr.substring(8, 10);
+        return buf;
     }
 
     /**
@@ -559,6 +598,7 @@ public class DateUtils {
 
     /**
      * 得到该日期所在周的周一的凌晨
+     *
      * @param date
      * @return
      */
@@ -574,6 +614,7 @@ public class DateUtils {
 
     /**
      * 得到该日期所在周的周末的最后一刻
+     *
      * @param date
      * @return
      */
@@ -590,6 +631,7 @@ public class DateUtils {
 
     /**
      * 得到该日期所在月的第一天的凌晨
+     *
      * @param date
      * @return
      */
@@ -598,13 +640,14 @@ public class DateUtils {
         cal.setTime(date);
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
         return cal.getTime();
     }
 
     /**
      * 得到该日期所在月的最后一天的最后一刻
+     *
      * @param date
      * @return
      */
@@ -614,8 +657,8 @@ public class DateUtils {
         cal.add(Calendar.MONTH, 1);
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.SECOND, -1);
         return cal.getTime();
     }

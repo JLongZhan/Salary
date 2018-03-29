@@ -30,15 +30,15 @@ public class FileInfoUtils {
 	}
 
 	// 递归
-	public static long getFileSize(File f) throws Exception// 取得文件夹大小
+	public static long getFileSize(File f) // 取得文件夹大小
 	{
 		long size = 0;
-		File flist[] = f.listFiles();
-		for (int i = 0; i < flist.length; i++) {
-			if (flist[i].isDirectory()) {
-				size = size + getFileSize(flist[i]);
+        File[] flist = f.listFiles();
+		for (File aFlist : flist) {
+			if (aFlist.isDirectory()) {
+				size = size + getFileSize(aFlist);
 			} else {
-				size = size + flist[i].length();
+				size = size + aFlist.length();
 			}
 		}
 		return size;
@@ -61,11 +61,11 @@ public class FileInfoUtils {
 
 	public static long getlist(File f) {// 递归求取目录文件个数
 		long size = 0;
-		File flist[] = f.listFiles();
+        File[] flist = f.listFiles();
 		size = flist.length;
-		for (int i = 0; i < flist.length; i++) {
-			if (flist[i].isDirectory()) {
-				size = size + getlist(flist[i]);
+		for (File aFlist : flist) {
+			if (aFlist.isDirectory()) {
+				size = size + getlist(aFlist);
 				size--;
 			}
 		}

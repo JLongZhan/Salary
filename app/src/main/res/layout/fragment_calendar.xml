@@ -4,17 +4,16 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+    <include layout="@layout/include_month_overtime_collect"/>
+    <!--日历控件-->
+    <com.beacon.materialcalendar.MaterialCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendarView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:mcv_arrowColor="?attr/colorPrimary"
         app:mcv_calendarMode="month"
-        app:mcv_headerTextAppearance="?android:attr/textAppearanceMedium"
         app:mcv_showOtherDates="none"
         app:mcv_weekDayLabels="@array/calendar_week"
-        app:mcv_tileHeight="match_parent"
-        app:mcv_weekDayTextAppearance="?android:attr/textAppearanceMedium"
         />
 </LinearLayout>

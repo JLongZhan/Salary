@@ -5,8 +5,15 @@
     <color name="colorAccent">#D81F26</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGray">#8a8a8a</color>
-    <color name="background_gray">#dddddd</color>
-    <color name="app_base_color">#D81F26</color>
-    <color name="app_calendar_today">#90F0AB4E</color>
+    <color name="colorBlack_90">#90000000</color>
+    <color name="black">#000000</color>
+    <color name="colorGray">#8c8c8c</color>
+    <color name="background_gray">#E0E0E0</color>
+    <color name="app_base_color">#F0552E</color>
+    <color name="app_calendar_today">#A0881E</color>
+    <color name="colorGreen">#00ff00</color>
+    <color name="colorWork">#00ffff</color>
+    <color name="colorYellow">#ffff00</color>
+    <color name="colorRed">#ff0000</color>
+    <color name="calendar_select_day">#D81F26</color>
 </resources>

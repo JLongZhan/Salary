@@ -23,4 +23,25 @@
            parent="android:TextAppearance.DeviceDefault.Small">
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="animTranalate">
+        <item name="android:windowEnterAnimation">@anim/popup_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit_anim</item>
+    </style>
+
+    <style name="radio_button_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/selector_record_overtime_date_color</item>
+        <item name="android:background">@drawable/select_record_overtime_date</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="SwitchStyle" parent="AppTheme">
+        <item name="colorAccent">@color/colorGreen</item>
+    </style>
 </resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@color/app_base_color"
+        android:padding="10dp">
+        <!--月加班收入-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="月加班收入"
+                android:textColor="@color/colorWhite"/>
+
+            <TextView
+                android:id="@+id/tv_calendar_overtime_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="$0.00"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <!--月加班时长-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="月加班时长"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_calendar_overtime_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="0.00h"
+                android:textColor="@color/colorWhite"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_calendar_arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/arrow_right"/>
+
+        <TextView
+            android:id="@+id/tv_calendar_overtime_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_calendar_arrow_right"
+            android:clickable="true"
+            android:text="明细"
+            android:textColor="@color/colorWhite"/>
+    </RelativeLayout>
+</merge>

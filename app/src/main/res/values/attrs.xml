@@ -72,12 +72,20 @@
     </declare-styleable>
 
     <declare-styleable name="StatisticsTitleView">
-        <attr name="project_name" format="string"/>
-        <attr name="project_money" format="string"/>
+        <attr name="title_left_name" format="string"/>
+        <attr name="title_left_color" format="color"/>
+        <attr name="title_right_name" format="string"/>
+        <attr name="title_right_color" format="color"/>
+        <attr name="title_view_background" format="color"/>
     </declare-styleable>
     <declare-styleable name="StatisticsItemView">
-        <attr name="item_name" format="string"/>
-        <attr name="item_money" format="string"/>
+        <attr name="item_left_name" format="string"/>
+        <attr name="item_right_name" format="string"/>
+        <attr name="item_right_name_color" format="color"/>
+        <attr name="item_left_sub_name" format="string"/>
+        <attr name="item_right_sub_name" format="string"/>
+        <attr name="item_left_sub_name_visibility" format="boolean"/>
+        <attr name="item_right_sub_name_visibility" format="boolean"/>
     </declare-styleable>
     <!--滚轮控件自定义属性-->
     <declare-styleable name="WheelView">

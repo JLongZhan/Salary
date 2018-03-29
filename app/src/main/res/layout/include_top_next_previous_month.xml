@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@color/colorWhite"
+        >
+
+        <Button
+            android:id="@+id/btn_statistics_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
+            android:text="上一月"
+            android:textColor="@color/app_base_color"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_top_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="10月1日 - 10月31日"
+            android:textColor="@color/colorBlack"/>
+
+        <Button
+            android:id="@+id/btn_statistics_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:text="下一月"
+            android:textColor="@color/app_base_color"/>
+    </RelativeLayout>
+</merge>

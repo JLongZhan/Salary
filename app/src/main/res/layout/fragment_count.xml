@@ -10,36 +10,7 @@
         android:layout_height="1dp"
         android:background="@color/colorGray"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <Button
-            android:id="@+id/btn_statistics_previous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:background="@android:color/transparent"
-            android:text="上一月"
-            android:textColor="@color/app_base_color"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="10月1日 - 10月31日"
-            android:textColor="@color/colorBlack"/>
-
-        <Button
-            android:id="@+id/btn_statistics_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@android:color/transparent"
-            android:text="下一月"
-            android:textColor="@color/app_base_color"/>
-    </RelativeLayout>
+    <include layout="@layout/include_top_next_previous_month"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_statistics"
@@ -47,5 +18,5 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:overScrollMode="never"
-        app:fastScrollEnabled="false"></android.support.v7.widget.RecyclerView>
+        app:fastScrollEnabled="false"/>
 </LinearLayout>

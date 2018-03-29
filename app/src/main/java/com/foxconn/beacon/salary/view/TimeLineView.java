@@ -6,6 +6,7 @@ import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -14,10 +15,12 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 
 import com.foxconn.beacon.salary.R;
 import com.foxconn.beacon.salary.utils.TextUtil;
+import com.foxconn.beacon.salary.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,6 @@ import java.util.List;
 
 public class TimeLineView extends View {
     private static final String TAG = "TimeLineView";
-    private final Context mContext;
     private List<String> mLabels = new ArrayList<>();
     private int mVSpace;
     private int mHSpace;
@@ -56,7 +58,6 @@ public class TimeLineView extends View {
      * 是否有发光效果
      */
     private boolean mIsShine;
-    private DisplayMetrics mDisplayMetrics;
     private Paint mCirclePaint;
 
     public TimeLineView(Context context) {
@@ -69,24 +70,24 @@ public class TimeLineView extends View {
 
     public TimeLineView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
-        mDisplayMetrics = context.getResources().getDisplayMetrics();
+        Context context1 = context;
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TimeLineView, defStyleAttr, 0);
 
         mTextColor = ta.getColor(R.styleable.TimeLineView_text_color, Color.GRAY);
-        mCircleColor = ta.getColor(R.styleable.TimeLineView_circle_color, ContextCompat.getColor(mContext, android.R.color.holo_orange_dark));
+        mCircleColor = ta.getColor(R.styleable.TimeLineView_circle_color, ContextCompat.getColor(context1, android.R.color.holo_orange_dark));
         mBarColor = ta.getColor(R.styleable.TimeLineView_v_space_color, 0xff8a8a8a);
         mSelectedColor = ta.getColor(R.styleable.TimeLineView_circle_select_color, Color.GREEN);
         mIsShine = ta.getBoolean(R.styleable.TimeLineView_is_shine, true);
         mBarWidth = ta.getDimensionPixelOffset(R.styleable.TimeLineView_bar_width, 20);
 
         mVSpace = ta.getDimensionPixelSize(R.styleable.TimeLineView_v_space,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, mDisplayMetrics));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, displayMetrics));
         mHSpace = ta.getDimensionPixelSize(R.styleable.TimeLineView_h_space,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, mDisplayMetrics));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, displayMetrics));
         mTextSize = ta.getDimensionPixelSize(R.styleable.TimeLineView_text_size,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, mDisplayMetrics));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, displayMetrics));
         ta.recycle();
 
         init();
@@ -136,7 +137,6 @@ public class TimeLineView extends View {
         canvas.drawRect(left, top, right, bottom, mPaint);
 //        绘制圆和字体
         for (int i = 0; i < mLabels.size(); i++) {
-
             mPaint.setColor(mSelectedPosition == i ? mSelectedColor : mTextColor);
             canvas.drawText(mLabels.get(i),
                     getPaddingLeft(),
@@ -170,7 +170,6 @@ public class TimeLineView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                float x = event.getX();
                 float y = event.getY();
                 float v = (y) / (mVSpace);
                 int pos = (int) v;
@@ -187,6 +186,7 @@ public class TimeLineView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 break;
+            default:break;
         }
         return super.onTouchEvent(event);
     }

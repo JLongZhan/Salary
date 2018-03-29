@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_social_security_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_left_name="社保设定方式"
+        app:item_right_name="输入百分比"/>
+    <!--输入数值-->
+    <RelativeLayout
+        android:id="@+id/rl_adjust_hours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_social_security_value_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="百分比"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/et_social_security_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:focusable="true"
+            android:hint="0.00 %"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

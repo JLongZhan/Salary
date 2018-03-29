@@ -3,7 +3,6 @@ package com.foxconn.beacon.salary.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import butterknife.Unbinder;
  * @describe:
  */
 
-public abstract class BaseFragment extends Fragment implements View.OnClickListener{
+public abstract class BaseFragment extends Fragment implements View.OnClickListener {
     protected Unbinder mBind;
     protected MainActivity mMainActivity;
 
@@ -36,7 +35,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         mBind = ButterKnife.bind(this, source);
         return source;
     }
-
     /**
      * 获取Fragment内容视图的资源ID
      *
@@ -66,11 +64,13 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     /**
      * 实现点击事件
+     *
      * @param view
      */
-    protected   void processClickListener(View view){
+    protected void processClickListener(View view) {
 
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -19,14 +19,10 @@ import com.foxconn.beacon.salary.base.BaseFragment;
 import com.foxconn.beacon.salary.constants.MyConstants;
 import com.foxconn.beacon.salary.listener.OnAdapterItemClickListener;
 import com.foxconn.beacon.salary.utils.DateUtils;
-import com.foxconn.beacon.salary.utils.ToastUtils;
+import com.foxconn.beacon.salary.utils.SPUtils;
 import com.foxconn.beacon.salary.utils.UIUtils;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,10 +60,9 @@ public class StatisticsFragment extends BaseFragment {
         mCalendar = Calendar.getInstance();
         mCurrentMonth = DateUtils.getCurrMonth() - 1;
         mCurrentYear = DateUtils.getCurrYear();
-        Log.i(TAG, "initData: " + Calendar.getInstance().get(Calendar.MONTH));
-        setToolbar();
         setTopDateInfo(mCurrentYear, mCurrentMonth);
         mRecyclerStatistics.setLayoutManager(new LinearLayoutManager(mMainActivity));
+
         mStatisticsAdapter = new StatisticsAdapter(mCurrentYear, mCurrentMonth);
         mRecyclerStatistics.setAdapter(mStatisticsAdapter);
     }
@@ -77,81 +72,85 @@ public class StatisticsFragment extends BaseFragment {
         mBtnStatisticsNext.setOnClickListener(this);
         mBtnStatisticsPrevious.setOnClickListener(this);
         mStatisticsAdapter.setOnItemClickListener(new OnAdapterItemClickListener() {
-            private Bundle mBundle;
-
             @Override
-            public void onItemClick(View view) {
+            public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), StatisticsSettingActivity.class);
+                Bundle mBundle = new Bundle();
                 switch (view.getId()) {
 //                    基本项目
                     case R.id.statisticsItem_basic_salary:
-                        mBundle = new Bundle();
                         mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "基本工资设置");
                         mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 0);
-
                         break;
                     case R.id.statisticsItem_overtime_income:
-                        mBundle = new Bundle();
                         mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "统计");
                         mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 1);
                         break;
                     case R.id.statisticsItem_adjustment:
-                        mBundle = new Bundle();
                         mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "编辑调休");
                         mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 2);
                         break;
 //                    补贴项目
 //                    白班
                     case R.id.item_day_shift_subsidy:
-                        mBundle = new Bundle();
                         mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "白班补贴设置");
-                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 100);
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 101);
                         break;
 //                    中班
                     case R.id.item_middle_shift_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "中班补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 102);
                         break;
-                    //                    中班
+//                    晚班
                     case R.id.item_night_shift_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "晚班补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 103);
                         break;
-                    //                    中班
+//                    全勤奖
                     case R.id.item_attendance_bonus_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "全勤奖设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 104);
                         break;
-                    //                    中班
+//                    交通补贴
                     case R.id.item_traffic_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "交通补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 105);
                         break;
-                    //                    中班
+//                    餐补
                     case R.id.item_food_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "伙食补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 106);
                         break;
-                    //                    中班
+//                    生活补贴
                     case R.id.item_live_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "生活补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 107);
                         break;
-                    //                    中班
+//                    岗位补贴
                     case R.id.item_job_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "岗位补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 108);
                         break;
-                    //                    中班
+//                    高温补贴
                     case R.id.item_hyperthermia_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "高温补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 109);
                         break;
-                    //                    中班
+//                    环境补贴
                     case R.id.item_environment_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "环境补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 110);
                         break;
-//                    中班
+//                    绩效补贴
                     case R.id.item_performance_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "绩效补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 111);
                         break;
 //                    其他补贴
                     case R.id.item_other_subsidy:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "其他补贴设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 112);
                         break;
-
                     case R.id.btn_statistics_add_subsidy:
                         mBundle = new Bundle();
                         mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "添加收入项");
@@ -159,29 +158,35 @@ public class StatisticsFragment extends BaseFragment {
                         break;
 //                    扣款项目
                     case R.id.item_things_leave:
-                        mBundle = new Bundle();
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "编辑事假");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 201);
                         break;
-                    //                    病假
+//                    病假
                     case R.id.item_sick_leave:
-                        mBundle = new Bundle();
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "编辑病假");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 202);
                         break;
 //                    食堂消费
                     case R.id.item_mess_consume:
-                        mBundle = new Bundle();
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "食堂消费设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 203);
                         break;
 //                    水电费
                     case R.id.item_utilities:
-                        mBundle = new Bundle();
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "水电费设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 204);
                         break;
 //                    住宿费
                     case R.id.item_quarterage:
-                        mBundle = new Bundle();
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "住宿费设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 205);
                         break;
-//                    其他
+//                    其他扣款项目
                     case R.id.item_other_deduct:
-
+                        mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "其他扣款设置");
+                        mBundle.putInt(MyConstants.STATISTICS_SETTING_LAYOUT, 206);
                         break;
-//                    扣款项
+//                    添加扣款项
                     case R.id.btn_statistics_add_deduct:
                         mBundle = new Bundle();
                         mBundle.putString(MyConstants.STATISTICS_SETTING_TITLE, "添加扣款项");
@@ -211,9 +216,17 @@ public class StatisticsFragment extends BaseFragment {
                 mBundle.putInt(MyConstants.CURRENT_YEAR, mCurrentYear);
                 mBundle.putInt(MyConstants.CURRENT_MONTH, mCurrentMonth);
                 intent.putExtras(mBundle);
-                startActivityForResult(intent, MyConstants.REQUEST_STATISTICS_SETTING);
+                startActivityForResult(intent,MyConstants.REQUEST_STATISTICS_SETTING);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MyConstants.REQUEST_STATISTICS_SETTING && resultCode == MyConstants.RESULT_STATISTICS_SETTING) {
+            mStatisticsAdapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -266,15 +279,6 @@ public class StatisticsFragment extends BaseFragment {
         mTvStatisticsTopDate.setText(sb.toString());
     }
 
-    /**
-     * 设置标题栏信息
-     */
-    private void setToolbar() {
-        mMainActivity.setToolbarTitle("统计");
-        mMainActivity.setToolbarTitleColor(UIUtils.getColor(R.color.app_base_color));
-        mMainActivity.setToolbarSubTitleVisibility(false);
-        mMainActivity.setToolbarRightVisibility(false);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,7 +1,6 @@
 package com.foxconn.beacon.salary.view;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -11,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -24,14 +22,12 @@ import android.widget.TextView;
 import com.foxconn.beacon.salary.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.List;
 
 /**
- * Author: wangjie
- * Email: tiantian.china.2@gmail.com
- * Date: 7/1/14.
+ * @author Fl331886
+ *         管轮View
  */
 public class WheelView extends ScrollView {
     public static final String TAG = WheelView.class.getSimpleName();
@@ -39,9 +35,11 @@ public class WheelView extends ScrollView {
     public static final int OFF_SET_DEFAULT = 1;
     int offset = OFF_SET_DEFAULT; // 偏移量（需要在最前面和最后面补全）
 
-    public static class OnWheelViewListener {
-        public void onSelected(int selectedIndex, String item) {
-        }
+    /**
+     * 控件的回调事件
+     */
+    public interface OnWheelViewListener {
+        void onSelected(int selectedIndex, String item);
     }
 
     private Context context;
@@ -177,8 +175,9 @@ public class WheelView extends ScrollView {
     int itemHeight = 0;
 
     private TextView createView(String item) {
+
         TextView tv = new TextView(context);
-        tv.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        tv.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tv.setSingleLine(true);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         tv.setText(item);
@@ -187,7 +186,6 @@ public class WheelView extends ScrollView {
         tv.setPadding(padding, padding, padding, padding);
         if (0 == itemHeight) {
             itemHeight = getViewMeasuredHeight(tv);
-            Log.d(TAG, "itemHeight: " + itemHeight);
             views.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeight * displayItemCount));
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) this.getLayoutParams();
             this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, itemHeight * displayItemCount));
@@ -213,6 +211,7 @@ public class WheelView extends ScrollView {
         super.onScrollChanged(l, t, oldl, oldt);
         refreshItemView(t);
 
+        int scrollDirection = -1;
         if (t > oldt) {
             scrollDirection = SCROLL_DIRECTION_DOWN;
         } else {
@@ -287,7 +286,6 @@ public class WheelView extends ScrollView {
     }
 
 
-    private int scrollDirection = -1;
     private static final int SCROLL_DIRECTION_UP = 0;
     private static final int SCROLL_DIRECTION_DOWN = 1;
 
@@ -297,7 +295,7 @@ public class WheelView extends ScrollView {
     @Override
     public void setBackgroundDrawable(Drawable background) {
         if (viewWidth == 0) {
-            viewWidth = getMeasuredWidth();
+            viewWidth = getWidth();
         }
 
         if (null == paint) {
@@ -308,8 +306,8 @@ public class WheelView extends ScrollView {
         background = new Drawable() {
             @Override
             public void draw(Canvas canvas) {
-                canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[0], viewWidth * 5 / 6, obtainSelectedAreaBorder()[0], paint);
-                canvas.drawLine(viewWidth * 1 / 6, obtainSelectedAreaBorder()[1], viewWidth * 5 / 6, obtainSelectedAreaBorder()[1], paint);
+                canvas.drawLine(viewWidth / 6, obtainSelectedAreaBorder()[0], viewWidth * 5 / 6, obtainSelectedAreaBorder()[0], paint);
+                canvas.drawLine(viewWidth / 6, obtainSelectedAreaBorder()[1], viewWidth * 5 / 6, obtainSelectedAreaBorder()[1], paint);
             }
 
             @Override
@@ -333,7 +331,7 @@ public class WheelView extends ScrollView {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        viewWidth = w;
+        viewWidth = getWidth();
         setBackgroundDrawable(null);
     }
 
@@ -344,7 +342,6 @@ public class WheelView extends ScrollView {
         if (null != onWheelViewListener) {
             onWheelViewListener.onSelected(selectedIndex, items.get(selectedIndex));
         }
-
     }
 
     public void setSeletion(int position) {

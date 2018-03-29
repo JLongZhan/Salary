@@ -71,8 +71,26 @@ public class SPUtils {
         } else if (defaultObject instanceof Long) {
             return sp.getLong(key, (Long) defaultObject);
         }
-
         return null;
+    }
+
+    public static int getInt(Context context, String key, int defaultObject){
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getInt(key, defaultObject);
+    }
+
+    /**
+     * 获取Float类型的数据
+     * @param context
+     * @param key
+     * @param defaultObject
+     * @return
+     */
+    public static float getFloat(Context context, String key, float defaultObject){
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getFloat(key, defaultObject);
     }
 
     /**
@@ -127,6 +145,13 @@ public class SPUtils {
         return sp.getAll();
     }
 
+    public static void putInt(Context context, String currentShowMonth, int month) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        sp.edit().putInt(currentShowMonth, month).commit();
+
+    }
+
     /**
      * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
      *
@@ -144,7 +169,7 @@ public class SPUtils {
             try {
                 Class clz = SharedPreferences.Editor.class;
                 return clz.getMethod("apply");
-            } catch (NoSuchMethodException e) {
+            } catch (NoSuchMethodException ignored) {
             }
 
             return null;
@@ -161,9 +186,7 @@ public class SPUtils {
                     sApplyMethod.invoke(editor);
                     return;
                 }
-            } catch (IllegalArgumentException e) {
-            } catch (IllegalAccessException e) {
-            } catch (InvocationTargetException e) {
+            } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException ignored) {
             }
             editor.commit();
         }

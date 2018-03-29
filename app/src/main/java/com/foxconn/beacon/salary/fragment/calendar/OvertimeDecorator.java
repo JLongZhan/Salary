@@ -1,16 +1,14 @@
 package com.foxconn.beacon.salary.fragment.calendar;
 
-import android.util.Log;
 
-import com.foxconn.beacon.salary.model.OverTimeBean;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
 
-import org.litepal.crud.DataSupport;
+import com.foxconn.beacon.salary.model.DBOperatorHelper;
+import com.foxconn.beacon.salary.model.DayWorkInfo;
+import com.foxconn.beacon.salary.utils.DateUtils;
+import com.beacon.materialcalendar.CalendarDay;
+import com.beacon.materialcalendar.DayViewDecorator;
+import com.beacon.materialcalendar.DayViewFacade;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,26 +18,48 @@ import java.util.List;
  */
 public class OvertimeDecorator implements DayViewDecorator {
     private static final String TAG = "OvertimeDecorator";
-    private String mHours;
-    private List<OverTimeBean> mOverTimeBeen;
+    private CalendarDay mCalendarDay;
+    private float[] hours;
+    private  List<DayWorkInfo> mMonthOvertimeInfo;
 
-    public OvertimeDecorator() {
+    public OvertimeDecorator(CalendarDay time) {
+        mCalendarDay = time;
+        setOvertimeHours(mCalendarDay);
+        mMonthOvertimeInfo = DBOperatorHelper.getMonthOvertimeInfo(time.getYear(), time.getMonth());
+
     }
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-        Log.i(TAG, "shouldDecorate: ");
-        mOverTimeBeen = DataSupport.where("dateTime=?",
-                String.valueOf(day.getDate().getTime())).find(OverTimeBean.class);
-        return mOverTimeBeen.size() > 0;
+        if (day.getMonth() != mCalendarDay.getMonth()) {
+            return false;
+        }
+        for (DayWorkInfo info : mMonthOvertimeInfo) {
+            if (info.getDatetime() == day.getDate().getTime()) {
+                mMonthOvertimeInfo.remove(info);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void decorate(DayViewFacade view) {
-        if (mOverTimeBeen != null&&mOverTimeBeen.size() > 0){
-            mHours = String.valueOf(mOverTimeBeen.get(0).getOvertimeHours());
-        }
+        view.addSpan(new OvertimeSpan(hours));
+    }
 
-        view.addSpan(new OvertimeSpan());
+    /**
+     * 设置加班信息
+     *
+     * @param day
+     */
+    public void setOvertimeHours(CalendarDay day) {
+        mCalendarDay = day;
+        hours = new float[DateUtils.getDaysOfMonth(day.getYear(), day.getMonth() + 1)];
+        mMonthOvertimeInfo = DBOperatorHelper.getMonthOvertimeInfo(day.getYear(), day.getMonth());
+        for (int i = 0; i < mMonthOvertimeInfo.size(); i++) {
+            DayWorkInfo dayWorkInfo = mMonthOvertimeInfo.get(i);
+            hours[dayWorkInfo.getDay() - 1] = dayWorkInfo.getOvertimeDuration();
+        }
     }
 }

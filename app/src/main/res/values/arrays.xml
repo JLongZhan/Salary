@@ -9,7 +9,19 @@
         <item>五</item>
         <item>六</item>
     </array>
-
+    <array name="work_type">
+        <item>默认</item>
+        <item>白班</item>
+        <item>晚班</item>
+        <item>休息</item>
+    </array>
+    <array name="leave_type">
+        <item>无请假</item>
+        <item>带薪休假</item>
+        <item>事假</item>
+        <item>病假</item>
+        <item>其他</item>
+    </array>
     <array name="work_hours">
         <item>0小时</item>
         <item>1小时</item>
@@ -49,7 +61,33 @@
         <item>45分钟</item>
         <item>50分钟</item>
         <item>55分钟</item>
-
-
+    </array>
+    <array name="adjust_offset">
+        <item>不抵扣</item>
+        <item>抵扣正班(1倍)</item>
+        <item>抵扣平时加班</item>
+        <item>抵扣周末加班</item>
+    </array>
+    <array name="deduct_project">
+        <item>事假</item>
+        <item>病假</item>
+        <item>食堂消费</item>
+        <item>水电费</item>
+        <item>住宿费</item>
+        <item>其他扣款</item>
+    </array>
+    <array name="income_project">
+        <item>白班补贴</item>
+        <item>中班补贴</item>
+        <item>晚班补贴</item>
+        <item>全勤奖</item>
+        <item>交通补贴</item>
+        <item>伙食补贴</item>
+        <item>生活补贴</item>
+        <item>岗位补贴</item>
+        <item>高温补贴</item>
+        <item>环境补贴</item>
+        <item>绩效补贴</item>
+        <item>其他补贴</item>
     </array>
 </resources>

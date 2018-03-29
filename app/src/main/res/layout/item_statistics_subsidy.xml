@@ -6,22 +6,30 @@
               android:orientation="vertical">
 
     <com.foxconn.beacon.salary.view.StatisticsTitleView
+        android:id="@+id/statisticsTitle_subsidy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:project_money="0.00元"
-        app:project_name="补贴项目"/>
+        app:title_left_name="补贴项目"
+        app:title_right_name="0.00元"/>
 
+    <LinearLayout
+        android:id="@+id/ll_subsidy_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_gray"
+        android:orientation="vertical">
+
+    </LinearLayout>
     <!--描述信息-->
     <TextView
-        android:id="@+id/tv_item_subsidy_description"
+        android:id="@+id/tv_statistics_subsidy_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_margin="15dp"
+        android:gravity="center"
         android:text="包含加班补贴、全勤奖、岗位补贴等补贴项"/>
-
     <Button
-        android:id="@+id/btn_item_add_subsidy"
+        android:id="@+id/btn_statistics_add_subsidy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

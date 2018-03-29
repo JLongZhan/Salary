@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
+    android:clickable="false"
     android:padding="5dp"
     >
 
-    <TextView
-        android:id="@+id/tv_statistics_item_name"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:textColor="@color/colorBlack"
-        android:padding="10dp"
-        android:text="基本工资"
-        android:textSize="16sp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_statistics_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:maxLines="1"
+            android:text="基本工资"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_item_sub_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:clickable="false"
+            android:maxLines="1"
+            android:text="基本工资"
+            android:textColor="@color/colorGray"
+            />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_item_arrow"
@@ -24,18 +47,39 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
+        android:clickable="false"
         android:src="@drawable/arrow_right"/>
 
-
-    <TextView
-        android:id="@+id/tv_statistics_money"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@id/iv_item_arrow"
+        android:gravity="center"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="10064.65元"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"/>
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_statistics_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:maxLines="1"
+            android:text="10064.65元"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_statistics_item_sub_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_statistics_money"
+            android:layout_below="@id/tv_statistics_money"
+            android:layout_marginTop="2dp"
+            android:clickable="false"
+            android:maxLines="1"
+            android:text="基本工资基本工资"
+            android:textColor="@color/colorGray"
+            />
+    </RelativeLayout>
 </RelativeLayout>

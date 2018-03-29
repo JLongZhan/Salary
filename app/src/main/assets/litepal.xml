@@ -3,6 +3,7 @@
     <dbname value="Salary"/>
     <version value="1"/>
     <list>
-        <mapping class="com.foxconn.beacon.salary.model.OverTimeBean" />
+        <mapping class="com.foxconn.beacon.salary.model.DayWorkInfo"/>
+        <mapping class="com.foxconn.beacon.salary.model.MonthSetting"/>
     </list>
 </litepal>

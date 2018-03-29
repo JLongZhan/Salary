@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_gray"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar"/>
+
+        <com.foxconn.beacon.salary.view.StatisticsItemView
+            android:id="@+id/statisticsItem_checking_circle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:item_left_name="月考勤周期"
+            app:item_right_name="1号-本月底"/>
+
+        <com.foxconn.beacon.salary.view.StatisticsItemView
+            android:id="@+id/statisticsItem_position_manage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item_left_name="职位选择"
+            app:item_right_name="未填写"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"/>
+        <!--基本工资设置-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="10dp"
+                android:text="基本工资"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/tv_salary_setting_unit_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:text="元/月"
+                android:textColor="@color/colorGray"/>
+
+            <EditText
+                android:id="@+id/et_salary_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@id/tv_salary_setting_unit_right"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:hint="0.00"
+                android:textColor="@color/colorBlack"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_salary_setting_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_base_color"
+        android:padding="15dp"
+        android:text="保存"
+        android:textColor="@color/colorWhite"/>
+</RelativeLayout>

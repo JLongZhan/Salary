@@ -3,4 +3,8 @@
     <string name="previous">Go to previous</string>
     <string name="next">Go to next</string>
     <string name="calendar">Calendar</string>
+    <string name="space">&#160;</string>
+    <string name="SocialSecurity">社保</string>
+    <string name="thing_leave_description">提示：事假扣款=小时工资 x  扣除百分比  x  事假小时数</string>
+    <string name="sick_leave_description">提示：病假扣款=小时工资 x  扣除百分比  x  病假小时数</string>
 </resources>

@@ -1,11 +1,5 @@
 package com.foxconn.beacon.salary.utils;
 
-/*******************************************************************
- * * * * *   * * * *   *     *       Created by OCN.Yang
- * *     *   *         * *   *       Time:2017/2/28 16:38.
- * *     *   *         *   * *       Email address:ocnyang@gmail.com
- * * * * *   * * * *   *     *.Yang  Web site:www.ocnyang.com
- *******************************************************************/
 
 import android.content.Context;
 
@@ -36,12 +30,10 @@ public class StreamUtils {
                 StringBuilder sb = new StringBuilder();
                 String line = null;
                 while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
+                    sb.append(line).append("\n");
                 }
                 is.close();
                 return sb.toString();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

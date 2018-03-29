@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class CommonUtils {
     private static Gson mGson;
     private static final String GSON_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    public static SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    public  static  SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     public static SimpleDateFormat formatDay = new SimpleDateFormat("d", Locale.getDefault());
     public static SimpleDateFormat formatMonthDay = new SimpleDateFormat("M-d", Locale.getDefault());
     public static SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -48,7 +48,7 @@ public class CommonUtils {
      * @param defaultValue
      * @return
      */
-    public final static int converToInt(Object value, int defaultValue) {
+    public static int converToInt(Object value, int defaultValue) {
         if (value == null || "".equals(value.toString().trim())) {
             return defaultValue;
         }
@@ -85,7 +85,7 @@ public class CommonUtils {
      * @param date
      * @return 年月日
      */
-    public static String formatDate(Date date) {
+    public static synchronized String formatDate(Date date) {
         return formatDate.format(date);
     }
 
@@ -95,7 +95,7 @@ public class CommonUtils {
      * @param date
      * @return 年月日 时分秒
      */
-    public static String formatDateTime(Date date) {
+    public synchronized static String formatDateTime(Date date) {
         return formatDateTime.format(date);
     }
 
@@ -131,7 +131,7 @@ public class CommonUtils {
      * @param date
      * @return
      */
-    public static Date parseDate(String date) {
+    public synchronized static Date parseDate(String date) {
         Date mDate = null;
         try {
             mDate = formatDate.parse(date);
@@ -148,7 +148,7 @@ public class CommonUtils {
      * @param datetime
      * @return
      */
-    public static Date parseDateTime(String datetime) {
+    public synchronized static Date parseDateTime(String datetime) {
         Date mDate = null;
         try {
             mDate = formatDateTime.parse(datetime);
@@ -166,7 +166,7 @@ public class CommonUtils {
      * @return 加密后的数据
      */
     public static String EncryptMD5(String s) {
-        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = s.getBytes();
@@ -178,10 +178,9 @@ public class CommonUtils {
             byte[] md = mdInst.digest();
             // 把密文转换成十六进制的字符串形式
             int j = md.length;
-            char str[] = new char[j * 2];
+            char[] str = new char[j * 2];
             int k = 0;
-            for (int i = 0; i < j; i++) {
-                byte byte0 = md[i];
+            for (byte byte0 : md) {
                 str[k++] = hexDigits[byte0 >>> 4 & 0xf];
                 str[k++] = hexDigits[byte0 & 0xf];
             }
@@ -296,7 +295,6 @@ public class CommonUtils {
         int phoneColumn = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER);
         int phoneNum = cursor.getInt(phoneColumn);
         String phoneResult = "";
-        //System.out.print(phoneNum);
         if (phoneNum > 0) {
             // 获得联系人的ID号
             int idColumn = cursor.getColumnIndex(ContactsContract.Contacts._ID);
@@ -307,8 +305,7 @@ public class CommonUtils {
                     null,
                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
                     null, null);
-            //int phoneCount = phones.getCount();
-            //allPhoneNum = new ArrayList<String>(phoneCount);
+            assert phones != null;
             if (phones.moveToFirst()) {
                 // 遍历所有的电话号码
                 for (; !phones.isAfterLast(); phones.moveToNext()) {
@@ -320,8 +317,8 @@ public class CommonUtils {
                         case 2:
                             phoneResult = phoneNumber;
                             break;
+                        default: break;
                     }
-                    //allPhoneNum.add(phoneNumber);
                 }
                 if (!phones.isClosed()) {
                     phones.close();

@@ -83,7 +83,6 @@ public class BitmapUtil {
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(0xff424242);
-        //paint.setColor(Color.TRANSPARENT);
         canvas.drawCircle(width / 2, height / 2, width / 2, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);

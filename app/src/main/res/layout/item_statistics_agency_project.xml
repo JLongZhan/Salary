@@ -6,16 +6,18 @@
               android:orientation="vertical">
 
     <com.foxconn.beacon.salary.view.StatisticsTitleView
+        android:id="@+id/statisticsTitle_agency_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:project_money="-758.93元"
-        app:project_name="代缴费项目"/>
+        app:title_right_name="-758.93元"
+        app:title_left_name="代缴费项目"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_social_security"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="0.00"
-        app:item_name="社保"/>
+        app:item_left_name="社保"
+        app:item_right_name="0.00"/>
 
     <View
         android:layout_width="wrap_content"
@@ -23,10 +25,11 @@
         android:background="@color/background_gray"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_accumulation_fund"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="0.00"
-        app:item_name="公积金"/>
+        app:item_left_name="公积金"
+        app:item_right_name="0.00"/>
 
     <View
         android:layout_width="wrap_content"
@@ -34,8 +37,9 @@
         android:background="@color/background_gray"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_income_tax"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="757.93"
-        app:item_name="个人所得税"/>
+        app:item_left_name="个人所得税"
+        app:item_right_name="757.93"/>
 </LinearLayout>

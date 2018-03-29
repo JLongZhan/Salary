@@ -2,28 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background_gray"
-        android:padding="10dp"
-        android:text="工作日期"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/colorBlack"/>
-
+    <!--出勤类型-->
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_work_type"
         android:layout_width="match_parent"
+        android:layout_marginTop="3dp"
         android:layout_height="wrap_content"
-        app:item_money="请选择出勤类别"
-        app:item_name="2017-10-09|星期一"></com.foxconn.beacon.salary.view.StatisticsItemView>
+        app:item_right_name="请选择出勤类别"
+        app:item_left_name="2017-10-09|星期一"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/colorGray"/>
+    <!--出勤时间-->
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_work_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="8小时0分钟"
-        app:item_name="应出勤"></com.foxconn.beacon.salary.view.StatisticsItemView>
+        app:item_right_name="8小时0分钟"
+        app:item_left_name="应出勤"/>
 </LinearLayout>

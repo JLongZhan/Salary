@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical">
 
     <TextView
@@ -15,41 +15,61 @@
         android:text="加班详情"
         android:textColor="@color/colorBlack"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
+        android:padding="5dp">
 
         <TextView
+            android:id="@+id/tv_overtime_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:padding="10dp"
             android:text="加班时长"
             android:textColor="@color/colorBlack"
             />
 
-        <com.foxconn.beacon.salary.view.WheelView
-            android:id="@+id/wheel_record_hours"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:wheel_offset="1"
-            />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_overtime_name"
+            android:orientation="horizontal">
 
-        <com.foxconn.beacon.salary.view.WheelView
-            android:id="@+id/wheel_record_minutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:wheel_offset="1"
-            />
-    </LinearLayout>
+            <com.foxconn.beacon.salary.view.WheelView
+                android:id="@+id/wheel_record_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:wheel_offset="1"
+                />
+
+            <com.foxconn.beacon.salary.view.WheelView
+                android:id="@+id/wheel_record_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:wheel_offset="1"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/colorGray"
+        android:padding="15dp"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_overtime_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="86.2元/小时(工作日1.5倍)"
-        app:item_name="加班工资"></com.foxconn.beacon.salary.view.StatisticsItemView>
+        app:item_left_name="加班工资"
+        app:item_right_name="请选择工资标准"/>
 
 </LinearLayout>

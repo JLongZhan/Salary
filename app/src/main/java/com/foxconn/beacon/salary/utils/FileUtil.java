@@ -36,9 +36,6 @@ public class FileUtil {
         if(!toFile.getParentFile().exists()){
             toFile.getParentFile().mkdirs();
         }
-//        if(toFile.exists()){
-//            toFile.delete();
-//        }
         try {
             FileInputStream fosfrom = new FileInputStream(fromFile);
             FileOutputStream fosto = new FileOutputStream(toFile);
@@ -53,9 +50,6 @@ public class FileUtil {
             fosto.close();
 
 
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -1,12 +1,15 @@
 package com.foxconn.beacon.salary.activity;
 
 
-import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -18,12 +21,16 @@ import com.foxconn.beacon.salary.base.BaseFragment;
 import com.foxconn.beacon.salary.fragment.CalendarFragment;
 import com.foxconn.beacon.salary.fragment.StatisticsFragment;
 import com.foxconn.beacon.salary.fragment.OvertimeFragment;
+import com.foxconn.beacon.salary.utils.DateUtils;
+import com.foxconn.beacon.salary.utils.UIUtils;
+import com.beacon.materialcalendar.CalendarDay;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import static com.foxconn.beacon.salary.R.id.fl_main_content;
 
 /**
  * @author: F1331886
@@ -32,7 +39,7 @@ import butterknife.ButterKnife;
  */
 
 public class MainActivity extends BaseActivity {
-    @BindView(R.id.fl_main_content)
+    @BindView(fl_main_content)
     FrameLayout mFlMainContent;
     @BindView(R.id.tab_layout_main)
     TabLayout mTabLayoutMain;
@@ -46,9 +53,13 @@ public class MainActivity extends BaseActivity {
     TextView mTvToolbarSubtitle;
     @BindView(R.id.btn_toolbar_right)
     Button mBtnToolbarRight;
-
+    @BindView(R.id.navigation_main)
+    NavigationView mNavigationMenu;
     private List<BaseFragment> mContentFragments;
     private FragmentManager mFm;
+    private OvertimeFragment mOvertimeFragment;
+    private CalendarFragment mCalendarFragment;
+    private StatisticsFragment mStatisticsFragment;
 
     @Override
     protected int getResId() {
@@ -56,19 +67,13 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void initContentView() {
-    }
-
-    @Override
     protected void initData() {
         getFragment();
-//        默认选中
-        mFm.beginTransaction().replace(R.id.fl_main_content, mContentFragments.get(0)).commit();
+        chooseShow(0);
     }
 
     @Override
     protected void initListener() {
-
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,9 +84,7 @@ public class MainActivity extends BaseActivity {
         mTabLayoutMain.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mFm.beginTransaction()
-                        .replace(R.id.fl_main_content, mContentFragments.get(tab.getPosition()))
-                        .commit();
+                chooseShow(tab.getPosition());
             }
 
             @Override
@@ -90,6 +93,13 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        mNavigationMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return true;
             }
         });
     }
@@ -106,33 +116,88 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
+     * 设置选中一个TAB
+     *
+     * @param selectedId
+     */
+    public void setTabSelected(int selectedId) {
+        mTabLayoutMain.setScrollPosition(selectedId, 1, false);
+        mTabLayoutMain.getTabAt(selectedId).select();
+    }
+
+    /**
      * 初始化所有的内容
      */
     private void getFragment() {
         mFm = getSupportFragmentManager();
+
+        FragmentTransaction transaction = mFm.beginTransaction();
+        mOvertimeFragment = new OvertimeFragment();
+        mCalendarFragment = new CalendarFragment();
+        mStatisticsFragment = new StatisticsFragment();
+
         mContentFragments = new ArrayList<>();
-        mContentFragments.add(new OvertimeFragment());
-        mContentFragments.add(new CalendarFragment());
-        mContentFragments.add(new StatisticsFragment());
+        mContentFragments.add(mOvertimeFragment);
+        mContentFragments.add(mCalendarFragment);
+        mContentFragments.add(mStatisticsFragment);
+
+        //全部添加到頁面中
+        transaction.add(fl_main_content, mOvertimeFragment);
+        transaction.add(fl_main_content, mCalendarFragment);
+        transaction.add(fl_main_content, mStatisticsFragment);
+        transaction.commit();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    public void setToolbarTitle(String title) {
-        mTvToolbarTitle.setText(title);
-    }
-    public void setToolbarSubTitleVisibility(boolean isVisibility){
-        if (isVisibility){
-            mTvToolbarSubtitle.setVisibility(View.VISIBLE);
-            mBtnToolbarRight.setVisibility(View.VISIBLE);
-        }else{
-            mTvToolbarSubtitle.setVisibility(View.GONE);
-            mBtnToolbarRight.setVisibility(View.GONE);
+    /**
+     * 选择显示一个Fragment
+     *
+     * @param pos
+     */
+    private void chooseShow(int pos) {
+        switch (pos) {
+            case 0:
+                mTvToolbarTitle.setText("工作周期");
+                mTvToolbarTitle.setTextColor(UIUtils.getColor(R.color.colorBlack));
+                String sb = String.valueOf(DateUtils.getCurrMonth()) + "月1日-" +
+                        DateUtils.getCurrMonth() + "月" +
+                        DateUtils.getDaysOfMonth(DateUtils.getCurrYear(), DateUtils.getCurrMonth()) + "日";
+                setToolbarSubtitle(sb);
+                break;
+            case 1:
+                mTvToolbarTitle.setTextColor(UIUtils.getColor(R.color.app_base_color));
+                CalendarDay selectCalendarDay = ((CalendarFragment) mContentFragments.get(1)).getSelectCalendarDay();
+                setCalendarPageTitle(selectCalendarDay.getYear(), selectCalendarDay.getMonth());
+                break;
+            default:
+                mTvToolbarTitle.setText("统计");
+                mTvToolbarTitle.setTextColor(UIUtils.getColor(R.color.app_base_color));
+                mTvToolbarSubtitle.setVisibility(View.GONE);
+                break;
         }
+        mBtnToolbarRight.setVisibility(View.GONE);
+
+        FragmentTransaction fragmentTransaction = mFm.beginTransaction();
+        fragmentTransaction.hide(mOvertimeFragment);
+        fragmentTransaction.hide(mCalendarFragment);
+        fragmentTransaction.hide(mStatisticsFragment);
+        fragmentTransaction.show(mContentFragments.get(pos));
+        fragmentTransaction.commit();
     }
+
+    public void setCalendarPageTitle(int year, int month) {
+        mTvToolbarTitle.setText(month + 1 + "月");
+        setToolbarSubtitle(String.valueOf(year));
+    }
+
+
+    /**
+     * 设置Toolbar副标题
+     *
+     * @param subTitle
+     */
+    private void setToolbarSubtitle(String subTitle) {
+        mTvToolbarSubtitle.setVisibility(View.VISIBLE);
+        mTvToolbarSubtitle.setText(subTitle);
+    }
+
 }

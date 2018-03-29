@@ -6,35 +6,43 @@
               android:orientation="vertical">
 
     <com.foxconn.beacon.salary.view.StatisticsTitleView
+        android:id="@+id/statisticsTitle_basic_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:project_money="10082.72元"
-        app:project_name="基本项目"/>
+        app:title_left_name="基本项目"
+        app:title_right_name="10082.72元"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_basic_salary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="10000.00"
-        app:item_name="基本工资"/>
+        app:item_left_name="基本工资"
+        app:item_right_name="10000.00"/>
 
     <View
         android:layout_width="wrap_content"
-        android:background="@color/background_gray"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="@color/background_gray"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_overtime_income"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="800.00"
-        app:item_name="加班工资"/>
+        app:item_left_name="加班工资"
+        app:item_right_name="800.00"/>
+
     <View
         android:layout_width="wrap_content"
-        android:background="@color/background_gray"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="@color/background_gray"/>
 
     <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:id="@+id/statisticsItem_adjustment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:item_money="500.00"
-        app:item_name="调休"/>
+        app:item_left_name="调休"
+        app:item_left_sub_name="0.0元/小时"
+        app:item_left_sub_name_visibility="true"
+        app:item_right_name="0.0小时"
+        app:item_right_sub_name_visibility="true"/>
 </LinearLayout>

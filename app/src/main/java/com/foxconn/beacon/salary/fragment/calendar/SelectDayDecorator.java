@@ -1,33 +1,37 @@
 package com.foxconn.beacon.salary.fragment.calendar;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
-import com.prolificinteractive.materialcalendarview.spans.DotSpan;
+import com.foxconn.beacon.salary.utils.DateUtils;
+import com.beacon.materialcalendar.CalendarDay;
+import com.beacon.materialcalendar.DayViewDecorator;
+import com.beacon.materialcalendar.DayViewFacade;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.Date;
 
 /**
- * Decorate several days with a dot
+ * @author F1331886
  */
-public class EventDecorator implements DayViewDecorator {
+public class SelectDayDecorator implements DayViewDecorator {
 
     private int color;
-    private HashSet<CalendarDay> dates;
+    private CalendarDay mCalendarDay;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
-        this.color = color;
-        this.dates = new HashSet<>(dates);
+    public SelectDayDecorator(CalendarDay calendarDay) {
+        mCalendarDay = calendarDay;
     }
+
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-        return dates.contains(day);
+        return mCalendarDay != null && DateUtils.date2String(mCalendarDay.getDate(), DateUtils.LONG_DATE).equals(DateUtils.date2String(day.getDate(), DateUtils.LONG_DATE));
     }
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(5, color));
+        view.addSpan(new SelectDaySpan());
+    }
+
+
+    public void setDate(Date date) {
+        this.mCalendarDay = CalendarDay.from(date);
     }
 }

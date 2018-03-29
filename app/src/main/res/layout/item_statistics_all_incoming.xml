@@ -14,7 +14,7 @@
         android:textSize="16sp"/>
 
     <TextView
-        android:id="@+id/tv_all_incoming"
+        android:id="@+id/tv_statistics_all_incoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

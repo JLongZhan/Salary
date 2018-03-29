@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:focusable="true"
-              android:requiresFadingEdge="none"
-              android:orientation="vertical">
+              android:focusableInTouchMode="true"
+              android:orientation="vertical"
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -17,9 +18,11 @@
         android:textColor="@color/colorBlack"/>
 
     <EditText
+        android:id="@+id/et_record_remark"
         android:layout_width="match_parent"
-        android:paddingLeft="15dp"
         android:layout_height="wrap_content"
-        android:hint="点此记录你的特别事项(0-50个字)"/>
+        android:layout_marginBottom="50dp"
+        android:hint="点此记录你的特别事项(0-50个字)"
+        android:padding="15dp"/>
 
 </LinearLayout>

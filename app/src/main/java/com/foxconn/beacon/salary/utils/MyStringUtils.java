@@ -52,11 +52,12 @@ public class MyStringUtils {
 		// 如果i为奇数时，处理成偶数
 		if (i % 2 == 1) {
 			// 该UCS2字符是汉字时，去掉这个截一半的汉字
-			if (bytes[i - 1] != 0)
-				i = i - 1;
-			// 该UCS2字符是字母或数字，则保留该字符
-			else
-				i = i + 1;
+			if (bytes[i - 1] != 0) {
+                i = i - 1;
+            }// 该UCS2字符是字母或数字，则保留该字符
+			else {
+                i = i + 1;
+            }
 		}
 		return new String(bytes, 0, i, "Unicode");
 	}
@@ -73,8 +74,9 @@ public class MyStringUtils {
 				c[i] = (char) 32;
 				continue;
 			}
-			if (c[i] > 65280 && c[i] < 65375)
-				c[i] = (char) (c[i] - 65248);
+			if (c[i] > 65280 && c[i] < 65375) {
+                c[i] = (char) (c[i] - 65248);
+            }
 		}
 		return new String(c);
 	}
@@ -111,9 +113,10 @@ public class MyStringUtils {
 	 */
 	public static String[] split(String str, String splitsign) {
 		int index;
-		if (str == null || splitsign == null)
-			return null;
-		ArrayList<String> al = new ArrayList<String>();
+		if (str == null || splitsign == null) {
+            return null;
+        }
+		ArrayList<String> al = new ArrayList<>();
 		while ((index = str.indexOf(splitsign)) != -1) {
 			al.add(str.substring(0, index));
 			str = str.substring(index + splitsign.length());
@@ -134,12 +137,13 @@ public class MyStringUtils {
 	 * @return String 替换后的字符串
 	 */
 	public static String replace(String from, String to, String source) {
-		if (source == null || from == null || to == null)
-			return null;
-		StringBuffer bf = new StringBuffer("");
+		if (source == null || from == null || to == null) {
+            return null;
+        }
+		StringBuilder bf = new StringBuilder("");
 		int index = -1;
 		while ((index = source.indexOf(from)) != -1) {
-			bf.append(source.substring(0, index) + to);
+			bf.append(source.substring(0, index)).append(to);
 			source = source.substring(index + from.length());
 			index = source.indexOf(from);
 		}
@@ -219,9 +223,9 @@ public class MyStringUtils {
 			if (str.getBytes("GBK").length <= length) {
 				return str;
 			}
-		} catch (Exception ex) {
+		} catch (Exception ignored) {
 		}
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 
 		int index = 0;
 		char c;
@@ -250,7 +254,7 @@ public class MyStringUtils {
 	public static String getUrlFileName(String urlString) {
 		String fileName = urlString.substring(urlString.lastIndexOf("/"));
 		fileName = fileName.substring(1, fileName.length());
-		if (fileName.equalsIgnoreCase("")) {
+		if ("".equalsIgnoreCase(fileName)) {
 			Calendar c = Calendar.getInstance();
 			fileName = c.get(Calendar.YEAR) + "" + c.get(Calendar.MONTH) + ""
 					+ c.get(Calendar.DAY_OF_MONTH) + ""
@@ -355,12 +359,13 @@ public class MyStringUtils {
 		String paramDate = dateFormater2.get().format(time);
 		if (curDate.equals(paramDate)) {
 			int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
-			if (hour == 0)
-				ftime = Math.max(
-						(cal.getTimeInMillis() - time.getTime()) / 60000, 1)
-						+ "分钟前";
-			else
-				ftime = hour + "小时前";
+			if (hour == 0) {
+                ftime = Math.max(
+                        (cal.getTimeInMillis() - time.getTime()) / 60000, 1)
+                        + "分钟前";
+            } else {
+                ftime = hour + "小时前";
+            }
 			return ftime;
 		}
 
@@ -369,12 +374,13 @@ public class MyStringUtils {
 		int days = (int) (ct - lt);
 		if (days == 0) {
 			int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
-			if (hour == 0)
-				ftime = Math.max(
-						(cal.getTimeInMillis() - time.getTime()) / 60000, 1)
-						+ "分钟前";
-			else
-				ftime = hour + "小时前";
+			if (hour == 0) {
+                ftime = Math.max(
+                        (cal.getTimeInMillis() - time.getTime()) / 60000, 1)
+                        + "分钟前";
+            } else {
+                ftime = hour + "小时前";
+            }
 		} else if (days == 1) {
 			ftime = "昨天";
 		} else if (days == 2) {
@@ -435,8 +441,9 @@ public class MyStringUtils {
 	 * @return boolean 若输入字符串为null或空字符串，返回true
 	 */
 	public static boolean isEmpty(String input) {
-		if (input == null || "".equals(input))
-			return true;
+		if (input == null || "".equals(input)) {
+            return true;
+        }
 
 		for (int i = 0; i < input.length(); i++) {
 			char c = input.charAt(i);
@@ -454,9 +461,7 @@ public class MyStringUtils {
 	 * @return
 	 */
 	public static boolean isEmail(String email) {
-		if (email == null || email.trim().length() == 0)
-			return false;
-		return EMAILER.matcher(email).matches();
+		return !(email == null || email.trim().length() == 0) && EMAILER.matcher(email).matches();
 	}
 
 	/**
@@ -469,7 +474,7 @@ public class MyStringUtils {
 	public static int toInt(String str, int defValue) {
 		try {
 			return Integer.parseInt(str);
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return defValue;
 	}
@@ -481,8 +486,9 @@ public class MyStringUtils {
 	 * @return 转换异常返回 0
 	 */
 	public static int toInt(Object obj) {
-		if (obj == null)
-			return 0;
+		if (obj == null) {
+            return 0;
+        }
 		return toInt(obj.toString(), 0);
 	}
 
@@ -495,7 +501,7 @@ public class MyStringUtils {
 	public static long toLong(String obj) {
 		try {
 			return Long.parseLong(obj);
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return 0;
 	}
@@ -509,7 +515,7 @@ public class MyStringUtils {
 	public static boolean toBool(String b) {
 		try {
 			return Boolean.parseBoolean(b);
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return false;
 	}
@@ -519,10 +525,10 @@ public class MyStringUtils {
 	 */
 	public static boolean isHandset(String handset) {
 		try {
-			if (!handset.substring(0, 1).equals("1")) {
+			if (!"1".equals(handset.substring(0, 1))) {
 				return false;
 			}
-			if (handset == null || handset.length() != 11) {
+			if (handset.length() != 11) {
 				return false;
 			}
 			String check = "^[0123456789]+$";
@@ -683,8 +689,8 @@ public class MyStringUtils {
 
 	private static String bytesToHexString(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < bytes.length; i++) {
-			String hex = Integer.toHexString(0xFF & bytes[i]);
+		for (byte aByte : bytes) {
+			String hex = Integer.toHexString(0xFF & aByte);
 			if (hex.length() == 1) {
 				sb.append('0');
 			}

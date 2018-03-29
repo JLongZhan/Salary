@@ -83,7 +83,7 @@ public class SdCardUtil {
      * Get SD card path list.
      */
     public static ArrayList<String> getSDCardPathEx() {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         try {
             Runtime runtime = Runtime.getRuntime();
             Process proc = runtime.exec("mount");
@@ -100,19 +100,17 @@ public class SdCardUtil {
                 }
 
                 if (line.contains("fat")) {
-                    String columns[] = line.split(" ");
+                    String[] columns = line.split(" ");
                     if (columns.length > 1) {
                         list.add("*" + columns[1]);
                     }
                 } else if (line.contains("fuse")) {
-                    String columns[] = line.split(" ");
+                    String[] columns = line.split(" ");
                     if (columns.length > 1) {
                         list.add(columns[1]);
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
