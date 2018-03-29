@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <com.foxconn.beacon.salary.view.StatisticsTitleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:project_money="-0.00元"
+        app:project_name="扣款项目"/>
+
+    <!--描述信息-->
+    <TextView
+        android:id="@+id/tv_item_dedect_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:text="包含事假、病假、食堂消费等扣款项目"/>
+
+    <Button
+        android:id="@+id/btn_item_add_subsidy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_rect"
+        android:text="添加扣款项"/>
+</LinearLayout>

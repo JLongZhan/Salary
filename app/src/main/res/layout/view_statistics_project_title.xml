@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_gray"
+    >
+
+    <TextView
+        android:id="@+id/tv_statistics_project_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:padding="10dp"
+        android:text="基本项目"
+        android:textSize="16sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_statistics_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:padding="10dp"
+        android:text="10064.65元"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/tv_statistics_money"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="共："
+        android:textSize="16sp"/>
+</RelativeLayout>

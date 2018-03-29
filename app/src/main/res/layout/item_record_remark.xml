@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:focusable="true"
+              android:requiresFadingEdge="none"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_gray"
+        android:padding="10dp"
+        android:text="备注"
+        android:textColor="@color/colorBlack"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:paddingLeft="15dp"
+        android:layout_height="wrap_content"
+        android:hint="点此记录你的特别事项(0-50个字)"/>
+
+</LinearLayout>

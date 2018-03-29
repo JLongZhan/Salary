@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#D81F26</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#8a8a8a</color>
-    <color name="background_gray">#cccccc</color>
+    <color name="background_gray">#dddddd</color>
     <color name="app_base_color">#D81F26</color>
+    <color name="app_calendar_today">#90F0AB4E</color>
 </resources>

@@ -1,7 +1,6 @@
 package com.foxconn.beacon.salary.activity;
 
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -9,13 +8,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.foxconn.beacon.salary.R;
 import com.foxconn.beacon.salary.base.BaseActivity;
 import com.foxconn.beacon.salary.base.BaseFragment;
 import com.foxconn.beacon.salary.fragment.CalendarFragment;
-import com.foxconn.beacon.salary.fragment.CountFragment;
+import com.foxconn.beacon.salary.fragment.StatisticsFragment;
 import com.foxconn.beacon.salary.fragment.OvertimeFragment;
 
 import java.util.ArrayList;
@@ -39,6 +40,12 @@ public class MainActivity extends BaseActivity {
     Toolbar mToolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @BindView(R.id.tv_toolbar_title)
+    TextView mTvToolbarTitle;
+    @BindView(R.id.tv_toolbar_subtitle)
+    TextView mTvToolbarSubtitle;
+    @BindView(R.id.btn_toolbar_right)
+    Button mBtnToolbarRight;
 
     private List<BaseFragment> mContentFragments;
     private FragmentManager mFm;
@@ -106,7 +113,7 @@ public class MainActivity extends BaseActivity {
         mContentFragments = new ArrayList<>();
         mContentFragments.add(new OvertimeFragment());
         mContentFragments.add(new CalendarFragment());
-        mContentFragments.add(new CountFragment());
+        mContentFragments.add(new StatisticsFragment());
     }
 
     @Override
@@ -114,5 +121,18 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    public void setToolbarTitle(String title) {
+        mTvToolbarTitle.setText(title);
+    }
+    public void setToolbarSubTitleVisibility(boolean isVisibility){
+        if (isVisibility){
+            mTvToolbarSubtitle.setVisibility(View.VISIBLE);
+            mBtnToolbarRight.setVisibility(View.VISIBLE);
+        }else{
+            mTvToolbarSubtitle.setVisibility(View.GONE);
+            mBtnToolbarRight.setVisibility(View.GONE);
+        }
     }
 }

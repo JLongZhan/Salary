@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/background_gray"
+        android:padding="10dp"
+        android:text="请假"
+        android:textColor="@color/colorBlack"/>
+
+
+    <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_money="无请假"
+        app:item_name="请假类型"></com.foxconn.beacon.salary.view.StatisticsItemView>
+
+    <com.foxconn.beacon.salary.view.StatisticsItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_money="请假时长"
+        app:item_name="0小时0分钟"></com.foxconn.beacon.salary.view.StatisticsItemView>
+</LinearLayout>

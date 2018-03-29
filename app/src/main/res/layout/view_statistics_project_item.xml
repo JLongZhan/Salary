@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:padding="5dp"
+    >
+
+    <TextView
+        android:id="@+id/tv_statistics_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/colorBlack"
+        android:padding="10dp"
+        android:text="基本工资"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/iv_item_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/arrow_right"/>
+
+
+    <TextView
+        android:id="@+id/tv_statistics_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@id/iv_item_arrow"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="10064.65元"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"/>
+</RelativeLayout>

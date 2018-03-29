@@ -3,9 +3,12 @@ package com.foxconn.beacon.salary.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.foxconn.beacon.salary.activity.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -17,8 +20,14 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener{
+    protected Unbinder mBind;
+    protected MainActivity mMainActivity;
 
-    private Unbinder mBind;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mMainActivity = (MainActivity) getActivity();
+    }
 
     @Nullable
     @Override
